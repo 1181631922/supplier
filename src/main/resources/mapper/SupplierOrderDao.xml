@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.education.supplier.dao.SupplierOrderDao">
+
+    <select id="countSupplierOrder" resultType="Integer">
+        select count(0)
+        from t_supplier_order t
+        where t.delete_status=0
+        and t.supplier_id=#{supplierId}
+    </select>
+
+    <select id="listSupplierOrder" resultType="com.education.supplier.util.model.One2Many">
+        select
+            so.id           id,
+            g.goods_name    goodsName,
+            u.name          userName,
+            s.name          supplierName
+        from t_supplier_order so
+            left join t_goods g     on g.id=so.goods_id
+            left join t_user u      on u.id=so.user_id
+            left join t_supplier s  on s.id=so.supplier_id
+        where so.supplier_id = #{supplierId}
+            and so.delete_status=0
+        order by id
+            limit #{offset},#{pageRow}
+    </select>
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.education.supplier.dao.LoginMapper">
+    <select id="getSupplier" resultType="com.alibaba.fastjson.JSONObject">
+        select
+            u.id supplierId,
+            u.name name,
+            u.password password,
+            u.phone_number phoneNumber
+        from
+            t_supplier u
+        where u.name = #{name}
+            and u.password = #{password}
+            and u.status = 1
+    </select>
+
+    <select id="getToken" resultType="com.alibaba.fastjson.JSONObject">
+        select
+            u.id supplierId,
+            u.name name,
+            u.phone_number phoneNumber,
+            u.supplier_token supplierToken
+        from
+            t_supplier u
+        where u.name = #{name}
+            and u.password = #{password}
+            and u.status = 1
+    </select>
+</mapper>
