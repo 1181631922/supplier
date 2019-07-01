@@ -10,9 +10,10 @@
     <result column="wx_id" jdbcType="VARCHAR" property="wxId" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="delete_status" jdbcType="BIT" property="deleteStatus" />
+    <result column="user_token" jdbcType="VARCHAR" property="userToken" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, mobile, name, password, nickname, wx_id, status, delete_status
+    id, mobile, name, password, nickname, wx_id, status, delete_status, user_token
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -27,10 +28,12 @@
   <insert id="insert" parameterType="com.education.supplier.model.User">
     insert into t_user (id, mobile, name, 
       password, nickname, wx_id, 
-      status, delete_status)
+      status, delete_status, user_token
+      )
     values (#{id,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{wxId,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{deleteStatus,jdbcType=BIT})
+      #{status,jdbcType=INTEGER}, #{deleteStatus,jdbcType=BIT}, #{userToken,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.education.supplier.model.User">
     insert into t_user
@@ -59,6 +62,9 @@
       <if test="deleteStatus != null">
         delete_status,
       </if>
+      <if test="userToken != null">
+        user_token,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -84,6 +90,9 @@
       </if>
       <if test="deleteStatus != null">
         #{deleteStatus,jdbcType=BIT},
+      </if>
+      <if test="userToken != null">
+        #{userToken,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -111,6 +120,9 @@
       <if test="deleteStatus != null">
         delete_status = #{deleteStatus,jdbcType=BIT},
       </if>
+      <if test="userToken != null">
+        user_token = #{userToken,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -122,7 +134,8 @@
       nickname = #{nickname,jdbcType=VARCHAR},
       wx_id = #{wxId,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
-      delete_status = #{deleteStatus,jdbcType=BIT}
+      delete_status = #{deleteStatus,jdbcType=BIT},
+      user_token = #{userToken,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

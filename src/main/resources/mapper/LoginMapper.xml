@@ -11,7 +11,7 @@
             t_supplier u
         where u.name = #{name}
             and u.password = #{password}
-            and u.status = 1
+            and u.delete_status = 0
     </select>
 
     <select id="getToken" resultType="com.alibaba.fastjson.JSONObject">
@@ -24,6 +24,6 @@
             t_supplier u
         where u.name = #{name}
             and u.password = #{password}
-            and u.status = 1
+            and u.delete_status = 0
     </select>
 </mapper>

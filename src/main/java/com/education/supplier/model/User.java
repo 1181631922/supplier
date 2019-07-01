@@ -17,6 +17,8 @@ public class User {
 
     private Boolean deleteStatus;
 
+    private String userToken;
+
     public Integer getId() {
         return id;
     }
@@ -79,5 +81,13 @@ public class User {
 
     public void setDeleteStatus(Boolean deleteStatus) {
         this.deleteStatus = deleteStatus;
+    }
+
+    public String getUserToken() {
+        return userToken;
+    }
+
+    public void setUserToken(String userToken) {
+        this.userToken = userToken;
     }
 }

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.education.supplier.dao.SupplierSonOrderMapper">
+  <resultMap id="BaseResultMap" type="com.education.supplier.model.SupplierSonOrder">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="supplier_order_id" jdbcType="INTEGER" property="supplierOrderId" />
+    <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, supplier_order_id, goods_id, status, price
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_supplier_son_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_supplier_son_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.education.supplier.model.SupplierSonOrder">
+    insert into t_supplier_son_order (id, supplier_order_id, goods_id, 
+      status, price)
+    values (#{id,jdbcType=INTEGER}, #{supplierOrderId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.education.supplier.model.SupplierSonOrder">
+    insert into t_supplier_son_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="supplierOrderId != null">
+        supplier_order_id,
+      </if>
+      <if test="goodsId != null">
+        goods_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="supplierOrderId != null">
+        #{supplierOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.education.supplier.model.SupplierSonOrder">
+    update t_supplier_son_order
+    <set>
+      <if test="supplierOrderId != null">
+        supplier_order_id = #{supplierOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null">
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.education.supplier.model.SupplierSonOrder">
+    update t_supplier_son_order
+    set supplier_order_id = #{supplierOrderId,jdbcType=INTEGER},
+      goods_id = #{goodsId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -3,14 +3,19 @@
 <mapper namespace="com.education.supplier.dao.SupplierOrderMapper">
   <resultMap id="BaseResultMap" type="com.education.supplier.model.SupplierOrder">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="delete_status" jdbcType="BIT" property="deleteStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="supplier_order_id" jdbcType="BIGINT" property="supplierOrderId" />
+    <result column="time_status" jdbcType="INTEGER" property="timeStatus" />
+    <result column="total_price" jdbcType="DECIMAL" property="totalPrice" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, goods_id, user_id, supplier_id, status, delete_status
+    id, user_id, supplier_id, status, delete_status, create_time, update_time, supplier_order_id, 
+    time_status, total_price
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -23,21 +28,20 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.education.supplier.model.SupplierOrder">
-    insert into t_supplier_order (id, goods_id, user_id, 
-      supplier_id, status, delete_status
-      )
-    values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      #{supplierId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{deleteStatus,jdbcType=BIT}
-      )
+    insert into t_supplier_order (id, user_id, supplier_id, 
+      status, delete_status, create_time, 
+      update_time, supplier_order_id, time_status, 
+      total_price)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{supplierId,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{deleteStatus,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{supplierOrderId,jdbcType=BIGINT}, #{timeStatus,jdbcType=INTEGER}, 
+      #{totalPrice,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.education.supplier.model.SupplierOrder">
     insert into t_supplier_order
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
-      </if>
-      <if test="goodsId != null">
-        goods_id,
       </if>
       <if test="userId != null">
         user_id,
@@ -51,13 +55,25 @@
       <if test="deleteStatus != null">
         delete_status,
       </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="supplierOrderId != null">
+        supplier_order_id,
+      </if>
+      <if test="timeStatus != null">
+        time_status,
+      </if>
+      <if test="totalPrice != null">
+        total_price,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
-      </if>
-      <if test="goodsId != null">
-        #{goodsId,jdbcType=INTEGER},
       </if>
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
@@ -71,14 +87,26 @@
       <if test="deleteStatus != null">
         #{deleteStatus,jdbcType=BIT},
       </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supplierOrderId != null">
+        #{supplierOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="timeStatus != null">
+        #{timeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="totalPrice != null">
+        #{totalPrice,jdbcType=DECIMAL},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.education.supplier.model.SupplierOrder">
     update t_supplier_order
     <set>
-      <if test="goodsId != null">
-        goods_id = #{goodsId,jdbcType=INTEGER},
-      </if>
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
       </if>
@@ -91,16 +119,35 @@
       <if test="deleteStatus != null">
         delete_status = #{deleteStatus,jdbcType=BIT},
       </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supplierOrderId != null">
+        supplier_order_id = #{supplierOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="timeStatus != null">
+        time_status = #{timeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="totalPrice != null">
+        total_price = #{totalPrice,jdbcType=DECIMAL},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.education.supplier.model.SupplierOrder">
     update t_supplier_order
-    set goods_id = #{goodsId,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER},
+    set user_id = #{userId,jdbcType=INTEGER},
       supplier_id = #{supplierId,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
-      delete_status = #{deleteStatus,jdbcType=BIT}
+      delete_status = #{deleteStatus,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      supplier_order_id = #{supplierOrderId,jdbcType=BIGINT},
+      time_status = #{timeStatus,jdbcType=INTEGER},
+      total_price = #{totalPrice,jdbcType=DECIMAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

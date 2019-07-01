@@ -22,6 +22,6 @@ public @interface AccessRequired {
 
 	public String redirectURL() default "";
 
-	public final String REDIRECT_LOGIN = "/account/login.do";
+	public final String REDIRECT_LOGIN = "/account/login";
 
 }
