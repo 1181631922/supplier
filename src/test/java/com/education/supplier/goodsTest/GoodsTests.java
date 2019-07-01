@@ -74,7 +74,9 @@ public class GoodsTests {
         goods.setGoodsName("三角函数");
         goods.setGoodsUrl("http://220.194.238.108/13/j/r/y/q/jryqujooljwzxpmyjumfuarxoguwld/hc.yinyuetai.com/81E9016B6454B2ADD09AE8853E6A7824.mp4?sc=ef957d6fd8824b68&br=779&vid=3386199&aid=39878&area=ML&vst=3");
         goods.setGoodsDesc("三角函数描述");
-        goods.setSupplierId(2);
+        goods.setSupplierId(1);
+        goods.setPrice(599L);
+        goods.setSalePrice(599L);
         goods.setImg("https://pics1.baidu.com/feed/810a19d8bc3eb135a61aecec3949a4d6fc1f4460.jpeg?token=bdc1255e05eba4ce9f590b8d7fcdf4d2&s=67222BE74B481B511AF0A917030060C3");
         goods.setGradeId(1);
         goods.setSubjectId(1);

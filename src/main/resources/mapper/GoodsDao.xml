@@ -7,6 +7,13 @@
         where t.delete_status=0
         and t.supplier_id=#{supplierId}
     </select>
+    <select id="countGoodsById" resultType="Integer">
+        select count(0)
+        from t_goods t
+        where t.delete_status=0
+        and t.supplier_id=#{supplierId}
+        and t.id=#{goodsId}
+    </select>
     <select id="listGoods" resultType="com.alibaba.fastjson.JSONObject">
         select t.id         id,
             t.goods_code    goodsCode,
@@ -28,5 +35,11 @@
         and t.supplier_id=#{supplierId}
         order by id
             limit #{offset},#{pageRow}
+    </select>
+    <select id="getStatus" resultType="com.alibaba.fastjson.JSONObject">
+        select t.id id,
+            t.name name
+        from t_status t
+        where id>=20000 and id &lt; 21000
     </select>
 </mapper>

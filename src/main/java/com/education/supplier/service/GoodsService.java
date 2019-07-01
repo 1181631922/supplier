@@ -30,4 +30,9 @@ public interface GoodsService {
      */
     JSONObject listGoods(JSONObject jsonObject);
 
+    /**
+     * 获取商品状态
+     */
+    JSONObject getStatus();
+
 }

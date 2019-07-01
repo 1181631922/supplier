@@ -9,6 +9,7 @@ import com.education.supplier.service.GoodsService;
 import com.education.supplier.service.LoginService;
 import com.education.supplier.util.CommonUtil;
 import com.education.supplier.util.StringTools;
+import com.education.supplier.util.constants.ErrorEnum;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -65,8 +66,12 @@ public class GoodsServiceImpl implements GoodsService {
         Integer id = jsonObject.getIntValue("goodsId");
         goods.setId(id);
         goods.setDeleteStatus(true);
-        goodsMapper.updateByPrimaryKeySelective(goods);
-        return CommonUtil.successJson();
+        if (goodsDao.countGoodsById(jsonObject) > 0) {
+            goodsMapper.updateByPrimaryKeySelective(goods);
+            return CommonUtil.successJson();
+        } else {
+            return CommonUtil.errorJson(ErrorEnum.E_600);
+        }
     }
 
     /**
@@ -79,8 +84,8 @@ public class GoodsServiceImpl implements GoodsService {
         Goods goods = new Goods();
         Integer id = jsonObject.getIntValue("goodsId");
         goods.setId(id);
-        String goodsCode = jsonObject.getString("goodsCode");
-        goods.setGoodsCode(goodsCode);
+//        String goodsCode = jsonObject.getString("goodsCode");
+//        goods.setGoodsCode(goodsCode);
         String goodsName = jsonObject.getString("goodsName");
         goods.setGoodsName(goodsName);
         Integer status = jsonObject.getIntValue("status");
@@ -89,8 +94,20 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setGoodsUrl(goodsUrl);
         String goodsDesc = jsonObject.getString("goodsDesc");
         goods.setGoodsDesc(goodsDesc);
-        goodsMapper.updateByPrimaryKeySelective(goods);
-        return CommonUtil.successJson();
+        Long salePrice = jsonObject.getLong("salePrice");
+        goods.setSalePrice(salePrice);
+        String img = jsonObject.getString("imgUrl");
+        goods.setImg(img);
+        Integer gradeId = jsonObject.getIntValue("gradeId");
+        goods.setGradeId(gradeId);
+        Integer subjectId = jsonObject.getIntValue("subjectId");
+        goods.setSubjectId(subjectId);
+        if (goodsDao.countGoodsById(jsonObject) > 0) {
+            goodsMapper.updateByPrimaryKeySelective(goods);
+            return CommonUtil.successJson();
+        } else {
+            return CommonUtil.errorJson(ErrorEnum.E_800);
+        }
     }
 
     /**
@@ -104,5 +121,15 @@ public class GoodsServiceImpl implements GoodsService {
         int count = goodsDao.countGoods(jsonObject);
         List<JSONObject> list = goodsDao.listGoods(jsonObject);
         return CommonUtil.successPage(jsonObject, list, count);
+    }
+
+    /**
+     * 获取商品状态
+     *
+     */
+    @Override
+    public JSONObject getStatus() {
+        List<JSONObject> list = goodsDao.getStatus();
+        return CommonUtil.successPage(list);
     }
 }

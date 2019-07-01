@@ -7,6 +7,7 @@ import com.education.supplier.util.CommonUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Author： fanyafeng
@@ -27,17 +28,29 @@ public class GoodsController {
         return goodsService.addGoods(requestJson);
     }
 
+    @PostMapping("/del")
+    public JSONObject delGoods(@RequestBody JSONObject requestJson, Supplier supplier) {
+        CommonUtil.hasAllRequired(requestJson, "goodsId");
+        requestJson.put("supplierId", supplier.getId());
+        return goodsService.delGoods(requestJson);
+    }
+
     @PostMapping("/update")
     public JSONObject updateGoods(@RequestBody JSONObject requestJson, Supplier supplier) {
-        CommonUtil.hasAllRequired(requestJson,"goodsId");
+        CommonUtil.hasAllRequired(requestJson, "goodsId");
         return goodsService.update(requestJson);
     }
 
     @PostMapping("/list")
-    public JSONObject listGoods(@RequestBody JSONObject requestJson,Supplier supplier) {
-        CommonUtil.hasAllRequired(requestJson,"pageNum");
-        int supplierId=supplier.getId();
-        requestJson.put("supplierId",supplierId);
+    public JSONObject listGoods(@RequestBody JSONObject requestJson, Supplier supplier) {
+        CommonUtil.hasAllRequired(requestJson, "pageNum");
+        int supplierId = supplier.getId();
+        requestJson.put("supplierId", supplierId);
         return goodsService.listGoods(requestJson);
+    }
+
+    @PostMapping("/status")
+    public JSONObject getStatus() {
+        return goodsService.getStatus();
     }
 }

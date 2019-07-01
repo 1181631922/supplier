@@ -20,4 +20,13 @@ public interface GoodsDao {
      */
     List<JSONObject> listGoods(JSONObject jsonObject);
 
+    /**
+     * 根据goodId和supplierId查看是否存在此商品
+     */
+    int countGoodsById(JSONObject jsonObject);
+
+    /**
+     * 获取商品状态
+     */
+    List<JSONObject> getStatus();
 }
