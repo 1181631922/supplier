@@ -132,4 +132,17 @@ public class GoodsServiceImpl implements GoodsService {
         List<JSONObject> list = goodsDao.getStatus();
         return CommonUtil.successPage(list);
     }
+
+    /**
+     * 根据商品名称模糊搜索
+     *
+     * @param jsonObject
+     */
+    @Override
+    public JSONObject fuzzySearch(JSONObject jsonObject) {
+        CommonUtil.fillPageParam(jsonObject);
+        int count = goodsDao.countFuzzyGoods(jsonObject);
+        List<JSONObject> list = goodsDao.getFuzzyGoods(jsonObject);
+        return CommonUtil.successPage(jsonObject, list, count);
+    }
 }

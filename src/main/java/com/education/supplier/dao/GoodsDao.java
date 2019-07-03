@@ -29,4 +29,14 @@ public interface GoodsDao {
      * 获取商品状态
      */
     List<JSONObject> getStatus();
+
+    /**
+     * 模糊统计数量
+     */
+    int countFuzzyGoods(JSONObject jsonObject);
+
+    /**
+     * 模糊搜索
+     */
+    List<JSONObject> getFuzzyGoods(JSONObject jsonObject);
 }

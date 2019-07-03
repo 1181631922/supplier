@@ -35,4 +35,8 @@ public interface GoodsService {
      */
     JSONObject getStatus();
 
+    /**
+     * 根据商品名称模糊搜索
+     */
+    JSONObject fuzzySearch(JSONObject jsonObject);
 }

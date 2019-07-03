@@ -49,6 +49,14 @@ public class GoodsController {
         return goodsService.listGoods(requestJson);
     }
 
+    @PostMapping("/fuzzySearch")
+    public JSONObject fuzzySearch(@RequestBody JSONObject requestJson,Supplier supplier){
+        CommonUtil.hasAllRequired(requestJson, "pageNum,name");
+        int supplierId=supplier.getId();
+        requestJson.put("supplierId",supplierId);
+        return goodsService.fuzzySearch(requestJson);
+    }
+
     @PostMapping("/status")
     public JSONObject getStatus() {
         return goodsService.getStatus();
