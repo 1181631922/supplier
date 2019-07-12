@@ -1,5 +1,7 @@
 package com.education.supplier.util.constants;
 
+import java.util.Random;
+
 /**
  * Author： fanyafeng
  * Data： 2019-06-17 18:16
@@ -8,7 +10,15 @@ package com.education.supplier.util.constants;
  * 通用常量类，单个业务的常量请单开一个类，方便常量的分类管理
  */
 public class Constants {
-    final public static String PREFIX = "base64union";
+    final public static String PREFIX = System.currentTimeMillis() + "";
+
+    public static String getPrefix(){
+        return System.currentTimeMillis() + "";
+    }
+
+    public static String getSuffix(){
+        return String.format("%02d",(new Random()).nextInt(99));
+    }
 
     final public static String SUCCESS_CODE = "100";
     final public static String SUCCESS_MSG = "请求成功";
