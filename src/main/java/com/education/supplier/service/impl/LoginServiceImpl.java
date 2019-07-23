@@ -7,6 +7,7 @@ import com.education.supplier.service.LoginService;
 import com.education.supplier.service.PermissionService;
 import com.education.supplier.util.Base64Util;
 import com.education.supplier.util.CommonUtil;
+import com.education.supplier.util.MD5Transfer;
 import com.education.supplier.util.constants.Constants;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -39,7 +40,8 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public JSONObject authLogin(JSONObject jsonObject) {
         String name = jsonObject.getString("name");
-        String password = jsonObject.getString("password");
+        String originPassword = jsonObject.getString("password");
+        String password = MD5Transfer.MD5(originPassword);
         JSONObject data = new JSONObject();
         Subject currentUser = SecurityUtils.getSubject();
 
